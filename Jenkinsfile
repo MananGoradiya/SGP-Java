@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build Maven') {
             steps {
-              checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MananGoradiya/SGP-Spring']]])
+              checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MananGoradiya/SGP-java']]])
                 sh 'mvn --version'
                 sh 'mvn clean install -X'
             }
@@ -18,7 +18,7 @@ pipeline {
                 script{
                                       
                     sh 'docker images'
-                    sh 'docker build -t manangoradiya/sgp-spring .'                    
+                    sh 'docker build -t manangoradiya/sgp-java .'                    
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
     // some block
                         sh 'docker login -u manangoradiya -p ${dockerhubpwd}'
 }
-                    sh 'docker push manangoradiya/sgp-spring'
+                    sh 'docker push manangoradiya/sgp-java'
                 }
             }
         }
